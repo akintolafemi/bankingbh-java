@@ -14,4 +14,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface AccountRepository extends JpaRepository<Account, Long> {
     //JPA handled method to fetch account by customer_id and account_type. Also check the record isn't deleted
     Account findFirstByCustomer_CustomerIdAndAccountTypeAndDeletedFalse(String customerId, String accountType);
+    
+    Account findFirstByAccountNumberAndDeletedFalse(String accountNumber);
 }

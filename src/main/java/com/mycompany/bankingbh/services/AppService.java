@@ -118,6 +118,10 @@ public class AppService {
 
     public ResponseEntity fetchAccountTransactions(String accountNumber) {
         try {
+            Account account = accountRepository.findFirstByAccountNumberAndDeletedFalse(accountNumber);
+            if (account == null)
+                return ResponseManager.standardResponse(404, HttpStatus.NOT_FOUND, "Account not found", null);
+            
             List<Transaction> transactions = transactionRepository.findByAccountNumber(accountNumber);
             return ResponseManager.standardResponse(200, HttpStatus.OK, 
                     "Account transactions fetched successfully!", transactions);
