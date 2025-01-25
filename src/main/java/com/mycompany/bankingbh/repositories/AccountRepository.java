@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Makintola
  */
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    Account findFirstByCustomerIdAndAccountTypeAndDeletedFalse(String customerId, String accountType);
+    Account findFirstByCustomer_CustomerIdAndAccountTypeAndDeletedFalse(String customerId, String accountType);
 }

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.bankingbh.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,16 +23,8 @@ public class Transaction {
     @Column(name = "source_account_number", nullable = false)
     private String source_account_number;
 
-    @ManyToOne
-    @JoinColumn(name = "source_account", referencedColumnName = "account_number", nullable = false)
-    private Account sourceAccount;
-
     @Column(name = "destination_account_number", nullable = false)
     private String destination_account_number;
-
-    @ManyToOne
-    @JoinColumn(name = "destination_account", referencedColumnName = "account_number", nullable = false)
-    private Account destinationAccount;
 
     @Column(nullable = false)
     private BigDecimal amount;
@@ -54,22 +47,6 @@ public class Transaction {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Account getSourceAccount() {
-        return sourceAccount;
-    }
-
-    public void setSourceAccount(Account sourceAccount) {
-        this.sourceAccount = sourceAccount;
-    }
-
-    public Account getDestinationAccount() {
-        return destinationAccount;
-    }
-
-    public void setDestinationAccount(Account destinationAccount) {
-        this.destinationAccount = destinationAccount;
     }
 
     public BigDecimal getAmount() {

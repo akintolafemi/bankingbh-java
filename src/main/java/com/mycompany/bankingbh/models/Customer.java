@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.bankingbh.models;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(unique = true, nullable = false)
     private String email;
@@ -38,7 +39,8 @@ public class Customer {
 
     @Column(nullable = false)
     private boolean deleted;
-
+    
+    @JsonManagedReference
     @OneToMany(mappedBy = "customer")
     private List<Account> accounts;
 

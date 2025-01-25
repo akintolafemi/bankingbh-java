@@ -15,6 +15,7 @@ import com.mycompany.bankingbh.utils.ResponseManager;
 import com.mycompany.bankingbh.utils.StandardResponse;
 import com.mycompany.bankingbh.utils.Utils;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,7 @@ public class AppService {
             }
 
             // Check if current account already exists
-            Account existingCurrentAccount = accountRepository.findFirstByCustomerIdAndAccountTypeAndDeletedFalse(
+            Account existingCurrentAccount = accountRepository.findFirstByCustomer_CustomerIdAndAccountTypeAndDeletedFalse(
                     req.getCustomerId(), "current");
             if (existingCurrentAccount != null) {
                 return ResponseManager.standardResponse(409, HttpStatus.CONFLICT, "Customer has an existing current account", existingCurrentAccount);
@@ -57,15 +58,17 @@ public class AppService {
             // Create new current account
             String accountNumber = Utils.generateAccountNumber();
             Account account = new Account();
-            account.setCustomerId(req.getCustomerId());
+            account.setCustomer(customer);
             account.setAccountNumber(accountNumber);
             account.setAccountType("current");
+            account.setCreatedAt(LocalDateTime.now());
+            account.setAccountBalance(new BigDecimal("0.00"));
             accountRepository.save(account);
 
             // Handle initial credit
             if (req.getInitialCredit() != null) {
                 BigDecimal initialCredit = req.getInitialCredit();
-                Account customerSavingsAccount = accountRepository.findFirstByCustomerIdAndAccountTypeAndDeletedFalse(
+                Account customerSavingsAccount = accountRepository.findFirstByCustomer_CustomerIdAndAccountTypeAndDeletedFalse(
                         req.getCustomerId(), "savings");
 
                 if (customerSavingsAccount != null && customerSavingsAccount.getAccountBalance().compareTo(initialCredit) > 0) {
@@ -75,13 +78,15 @@ public class AppService {
 
                     // Credit to current account
                     account.setAccountBalance(initialCredit);
-                    accountRepository.save(account);
 
                     // Log the transaction
                     Transaction transaction = new Transaction();
+//                    transaction.setSourceAccount(customerSavingsAccount);
+//                    transaction.setDestinationAccount(account);
                     transaction.setSource_account_number(customerSavingsAccount.getAccountNumber());
                     transaction.setDestination_account_number(accountNumber);
                     transaction.setAmount(initialCredit);
+                    transaction.setCreatedAt(LocalDateTime.now());
                     transactionRepository.save(transaction);
                 }
             }
@@ -90,6 +95,7 @@ public class AppService {
         } catch (ResponseStatusException e) {
             throw e;
         } catch (Exception e) {
+            System.out.println("ee: " + e.toString());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error occurred", e);
         }
     }
@@ -100,7 +106,6 @@ public class AppService {
             if (customer == null) {
                 return ResponseManager.standardResponse(404, HttpStatus.NOT_FOUND, "Customer not found", customer);
             }
-
             return ResponseManager.standardResponse(200, HttpStatus.OK, "Customer data fetched successfully!", customer);
         } catch (ResponseStatusException e) {
             throw e;
