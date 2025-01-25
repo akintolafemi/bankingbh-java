@@ -11,6 +11,7 @@ import java.util.Random;
  * @author Makintola
  */
 public class Utils {
+    //method to generate account number of length 10
     public static String generateAccountNumber() {
         long min = 1000000000L; // Minimum 10-digit number (1 followed by 9 zeros)
         long max = 9999999999L; // Maximum 10-digit number (9 nines)

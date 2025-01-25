@@ -22,13 +22,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class AuthorizationFilter extends OncePerRequestFilter {
 
     @Value("${bearer.token}")
-    private String BEARER_TOKEN;  // You'll inject the token value here
+    private String BEARER_TOKEN;  // Inject token from application.properties
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         
-        String requestPath = request.getRequestURI();
+        String requestPath = request.getRequestURI(); //get the current request route
         
         // Only apply the filter to paths starting with "/api"
         if (!requestPath.startsWith("/api")) {
@@ -36,12 +36,13 @@ public class AuthorizationFilter extends OncePerRequestFilter {
             return;
         }
         
-        String authorizationHeader = request.getHeader("Authorization");
+        String authorizationHeader = request.getHeader("Authorization"); // retrieve authorization token from headers
 
         // Check if the Authorization header is missing
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setContentType("application/json");
+            response.setContentType("application/json"); 
+            //return unauthorized error message
             response.getWriter().write("{\"message\":\"Authorizationrequired to access endpoint\",\"status\":\"UNAUTHORIZED\",\"code\":401}");
             return;
         }
