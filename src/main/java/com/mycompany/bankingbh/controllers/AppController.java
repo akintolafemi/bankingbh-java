@@ -10,6 +10,7 @@ import com.mycompany.bankingbh.utils.StandardResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "BankingBH Accounts API")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1") //apply this prefix to all routes in this controller
 public class AppController {
     
     @Autowired
@@ -33,7 +34,7 @@ public class AppController {
 
     @ApiOperation(value = "Open a new current account", response = StandardResponse.class)
     @PostMapping("/open-current-account")
-    public ResponseEntity openCustomerCurrentAccount(@RequestBody OpenCurrentAccountDto req) {
+    public ResponseEntity openCustomerCurrentAccount(@Valid @RequestBody OpenCurrentAccountDto req) {
         return appService.openCustomerCurrentAccount(req);
     }
 

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  *
  * @author Makintola
  */
-public class OpenCurrentAccountDto {
+public class OpenCurrentAccountDto { //DTO to ensure request body matches expected types
 
     @ApiModelProperty(
         value = "Unique customer identifier",

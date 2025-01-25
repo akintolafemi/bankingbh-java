@@ -12,7 +12,6 @@ import com.mycompany.bankingbh.repositories.AccountRepository;
 import com.mycompany.bankingbh.repositories.CustomerRepository;
 import com.mycompany.bankingbh.repositories.TransactionRepository;
 import com.mycompany.bankingbh.utils.ResponseManager;
-import com.mycompany.bankingbh.utils.StandardResponse;
 import com.mycompany.bankingbh.utils.Utils;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -45,13 +44,15 @@ public class AppService {
             // Check if customer exists
             Customer customer = customerRepository.findByCustomerId(req.getCustomerId());
             if (customer == null) {
+                // return error message if customer does not exist
                 return ResponseManager.standardResponse(404, HttpStatus.NOT_FOUND, "Customer not found", customer);
             }
 
-            // Check if current account already exists
+            // Check if current account already exists for customer to disable multiple current accounts for a customer
             Account existingCurrentAccount = accountRepository.findFirstByCustomer_CustomerIdAndAccountTypeAndDeletedFalse(
                     req.getCustomerId(), "current");
             if (existingCurrentAccount != null) {
+                // return conflict error message if customer already has a current account
                 return ResponseManager.standardResponse(409, HttpStatus.CONFLICT, "Customer has an existing current account", existingCurrentAccount);
             }
 
@@ -72,19 +73,19 @@ public class AppService {
                         req.getCustomerId(), "savings");
 
                 if (customerSavingsAccount != null && customerSavingsAccount.getAccountBalance().compareTo(initialCredit) > 0) {
-                    // Deduct from savings
+                    // Deduct from savings account
                     customerSavingsAccount.setAccountBalance(customerSavingsAccount.getAccountBalance().subtract(initialCredit));
                     accountRepository.save(customerSavingsAccount);
 
-                    // Credit to current account
+                    // Credit to new current account
                     account.setAccountBalance(initialCredit);
 
                     // Log the transaction
                     Transaction transaction = new Transaction();
 //                    transaction.setSourceAccount(customerSavingsAccount);
 //                    transaction.setDestinationAccount(account);
-                    transaction.setSource_account_number(customerSavingsAccount.getAccountNumber());
-                    transaction.setDestination_account_number(accountNumber);
+                    transaction.setSource_account_number(customerSavingsAccount.getAccountNumber()); //savings account as source
+                    transaction.setDestination_account_number(accountNumber); //current account as destination
                     transaction.setAmount(initialCredit);
                     transaction.setCreatedAt(LocalDateTime.now());
                     transactionRepository.save(transaction);
@@ -104,6 +105,7 @@ public class AppService {
         try {
             Customer customer = customerRepository.findByCustomerIdWithAccounts(customerId);
             if (customer == null) {
+                // return error message if customer does not exist
                 return ResponseManager.standardResponse(404, HttpStatus.NOT_FOUND, "Customer not found", customer);
             }
             return ResponseManager.standardResponse(200, HttpStatus.OK, "Customer data fetched successfully!", customer);

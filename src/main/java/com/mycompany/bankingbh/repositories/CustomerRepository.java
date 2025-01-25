@@ -15,6 +15,6 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Customer findByCustomerId(String customerId);
-    @Query("SELECT c FROM Customer c LEFT JOIN FETCH c.accounts WHERE c.customerId = :customerId")
+    @Query("SELECT c FROM Customer c LEFT JOIN FETCH c.accounts WHERE c.customerId = :customerId")  //fetch customer by customer_id and join all customer accounts from accounts table
     Customer findByCustomerIdWithAccounts(@Param("customerId") String customerId);
 }
