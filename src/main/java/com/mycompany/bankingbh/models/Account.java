@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.bankingbh.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,11 +21,9 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "customer_id", nullable = false)
-    private String customerId;
-
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "customer", referencedColumnName = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     private Customer customer;
 
     @Column(name = "account_number", unique = true, nullable = false)
@@ -47,26 +47,12 @@ public class Account {
     @Column(nullable = false)
     private boolean deleted;
 
-    @OneToMany(mappedBy = "sourceAccount")
-    private List<Transaction> inflows;
-
-    @OneToMany(mappedBy = "destinationAccount")
-    private List<Transaction> outflows;
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
     }
 
     public Customer getCustomer() {
@@ -132,22 +118,4 @@ public class Account {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-
-    public List<Transaction> getInflows() {
-        return inflows;
-    }
-
-    public void setInflows(List<Transaction> inflows) {
-        this.inflows = inflows;
-    }
-
-    public List<Transaction> getOutflows() {
-        return outflows;
-    }
-
-    public void setOutflows(List<Transaction> outflows) {
-        this.outflows = outflows;
-    }
-    
-    
 }
