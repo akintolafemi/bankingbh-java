@@ -23,9 +23,9 @@ public class SwaggerConfig {
         // Add security scheme for Bearer Token
         SecurityScheme securityScheme = new SecurityScheme()
                 .type(SecurityScheme.Type.HTTP)
-                .scheme("bearer")
-                .bearerFormat("JWT")
-                .name("Authorization");
+                .scheme("bearer") //specify type of authentication
+                .bearerFormat("JWT") //expected token format is Json Web Token
+                .name("Authorization"); //header key
 
         // Add security requirement to apply globally
         SecurityRequirement securityRequirement = new SecurityRequirement().addList("Authorization");

@@ -19,7 +19,7 @@ After pulling the repo, follow these steps to set up the project:
 
 1. Proceed to open the project in your Java code editor.
 2. Dependencies should download automatically.
-3. Update application.properties (src/main/resources/application.properties) file with value (JWT authorization) for variable 'bearer.token'
+3. Update application.properties (src/main/resources/application.properties) file with value of your chosen (JWT authorization) for variable 'bearer.token'
 4. Click on run and the project should run on port 3001
 5. Database is automatically created and data is seeded to it. See below for seeded records
 

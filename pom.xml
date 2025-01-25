@@ -22,10 +22,10 @@
 
         <!-- Spring Boot Starter Data JPA -->
         <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-jpa</artifactId>
-    <version>3.4.2</version>
-</dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>3.4.2</version>
+        </dependency>
 
 
         <!-- SQLite JDBC Driver -->
@@ -36,22 +36,26 @@
         </dependency>
         
         <dependency>
-    <groupId>org.hibernate.orm</groupId>
-    <artifactId>hibernate-community-dialects</artifactId>
-    <version>7.0.0.Beta3</version>
-</dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-community-dialects</artifactId>
+            <version>7.0.0.Beta3</version>
+        </dependency>
 
 
         <!-- Spring Boot Starter Test (for testing) -->
         <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-test</artifactId>
-    <version>3.4.2</version>
-    <scope>test</scope>
-</dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>3.4.2</version>
+            <scope>test</scope>
+        </dependency>
 
-
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+        
         <!-- Swagger OpenAPI (SpringDoc) -->
         <dependency>
             <groupId>org.springdoc</groupId>
