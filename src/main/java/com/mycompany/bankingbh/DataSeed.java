@@ -38,7 +38,7 @@ public class DataSeed implements CommandLineRunner {
 
 //
         Account janeAccount = new Account();
-        janeAccount.setAccountNumber("001122334455");
+        janeAccount.setAccountNumber("0011223344");
         janeAccount.setAccountBalance(BigDecimal.valueOf(5000.00));
         janeAccount.setAccountType("savings");
         janeAccount.setCustomer(janeDoe);
