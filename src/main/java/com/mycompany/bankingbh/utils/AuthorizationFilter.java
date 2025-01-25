@@ -43,7 +43,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json"); 
             //return unauthorized error message
-            response.getWriter().write("{\"message\":\"Authorizationrequired to access endpoint\",\"status\":\"UNAUTHORIZED\",\"code\":401}");
+            response.getWriter().write("{\"message\":\"Authorization required to access endpoint\",\"status\":\"UNAUTHORIZED\",\"code\":401}");
             return;
         }
 
