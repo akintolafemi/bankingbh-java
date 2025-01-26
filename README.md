@@ -8,7 +8,7 @@
 
 ### Technologies Used
 
-- **Framework**: Java Springboot
+- **Framework**: Java (21) Springboot
 - **ORM**: JPA
 - **Database**: Sqlite
 - **Authentication**: Bearer Token
@@ -20,8 +20,11 @@ After pulling the repo, follow these steps to set up the project:
 1. Proceed to open the project in your Java code editor.
 2. Dependencies should download automatically.
 3. Update application.properties (src/main/resources/application.properties) file with value of your chosen (JWT authorization) for variable 'bearer.token'
-4. Click on run and the project should run on port 3001
-5. Database is automatically created and data is seeded to it. See below for seeded records
+4. Also, proceed to src/main/resources/static/js/script.js. Open the script file and update the value of the variable 'BEARER_TOKEN' on line 2 with same value as above. This will ensure the same bearer token is used when testing the frontend
+5. Click on run and the project should run on port 3001
+6. Database is automatically created and data is seeded to it. See below for seeded records
+7. API Documentation with Swagger(OpenAPI) will be visible at http://localhost:3001/swagger-ui/index.html
+8. Static UI page is served at http://localhost:3001/index.html
 
 ## Resources
 

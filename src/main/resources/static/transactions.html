@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banking BH Home</title>
+  <!-- Font Awesome -->
+  <link
+    href="./css/all.min.css"
+    rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link
+    href="./css/mdb.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header>
+    <style>
+      .navbar .nav-link {
+        color: #fff !important;
+      }
+    </style>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark d-none d-lg-block" >
+      <div class="container-fluid">
+        <div class="" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Current Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="customer.html">Customer Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="transactions.html">Transactions</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+  </header>
+  <!--Main Navigation-->
+  <div class="container-fluid vh-100 p-5" style="background-color: rgba(0, 0, 0, 0.8);">
+    <div class="row justify-content-center">
+      <div class="">
+        <form class="bg-white rounded shadow-5-strong p-5">
+          <h4>Fetch Account Transactions</h4>
+          <br/>
+          <div class="form-outline mb-4" data-mdb-input-init>
+            <input type="text" id="accountnumber" class="form-control" />
+            <label class="form-label" for="accountnumber">Account Number</label>
+          </div>
+
+          <!-- Submit button -->
+          <button type="button" id="btn_fetch_transactions" class="btn btn-primary btn-block" data-mdb-ripple-init>Fetch</button>
+        </form>
+      </div>
+      <div class="pt-2 rounded">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Type</th>
+              <th scope="col">Sender/Beneficiary</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody id="transactions_table">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- MDB -->
+  <script
+    type="text/javascript"
+    src="./js/mdb.umd.min.js"
+  ></script>
+  <!-- MDB -->
+  <script
+    type="text/javascript"
+    src="./js/jquery.min.js"
+  ></script>
+	<script
+	  type="text/javascript"
+	  src="./js/script.js"
+	></script>
+</body>
+</html>
