@@ -26,16 +26,15 @@ After pulling the repo, follow these steps to set up the project:
 7. API Documentation with Swagger(OpenAPI) will be visible at http://localhost:3001/swagger-ui/index.html
 8. Static UI page is served at http://localhost:3001/index.html
 10. 9 test cases were written to test the following. To run the tests, depending on your IDE, click on the project and click on test.
-- Tests
- - Test for when no authorization token is found in header
- - Test for when invalid authorization token is sent in header
- - Test for get valid customer details 
- - Test for get invalid customer details
- - Test for get valid account transactions
- - Test for get invalid account transactions
- - Test for invalid customer on create current account
- - Test for null customer on create current account
- - Test for invalid initial credit on create current account
+- Test for when no authorization token is found in header
+- Test for when invalid authorization token is sent in header
+- Test for get valid customer details 
+- Test for get invalid customer details
+- Test for get valid account transactions
+- Test for get invalid account transactions
+- Test for invalid customer on create current account
+- Test for null customer on create current account
+- Test for invalid initial credit on create current account
 
 
 ## Resources
