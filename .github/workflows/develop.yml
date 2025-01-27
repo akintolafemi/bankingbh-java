@@ -23,5 +23,25 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: java-app
+          name: bankingbh
           path: '${{ github.workspace }}/target/*.jar'
+          
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: bankingbh
+          path: '${{ github.workspace }}/target/'
+          
+      - name: Install SSHPASS
+        run: sudo apt-get install -y sshpass
+          
+      - name: Deploy to Staging
+        run: |
+          sshpass -p "${{ secrets.VPS_PASS }}" scp target/bankingbh.jar ${{ secrets.VPS_CONNECTION }}:/bankingbh/
+        env:
+          SSHPASS: ${{ secrets.VPS_PASS }}
