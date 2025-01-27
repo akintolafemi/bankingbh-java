@@ -49,5 +49,6 @@ jobs:
       - name: Deploy to Staging
         run: |
           sshpass -p "${{ secrets.VPS_PASS }}" scp ${{ github.workspace }}/target/bankingbh-1.0-SNAPSHOT.jar ${{ secrets.VPS_CONNECTION }}:/${{ secrets.VPS_USER }}/bankingbh
+          sshpass -p "${{ secrets.VPS_PASS }}" ssh ${{ secrets.VPS_CONNECTION }} "sudo systemctl restart bankingbh.service"
         env:
           SSHPASS: ${{ secrets.VPS_PASS }}
