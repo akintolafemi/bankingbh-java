@@ -39,9 +39,9 @@ public class SwaggerConfig {
                         .description("API to be used for opening a new 'current account' of already existing customers."))
                 .addSecurityItem(securityRequirement)
                 .components(new io.swagger.v3.oas.models.Components()
-                        .addSecuritySchemes("Authorization", securityScheme));
-//                        .addSecurityItem(new SecurityRequirement().addList("ngrok-skip-browser-warning", "1")) //add this to force ngrok from throwing warning message
-//                .servers(List.of(new Server().url("http://localhost:3001/").description("Localhost Server"),
-//                        new Server().url("https://afd1-203-161-56-189.ngrok-free.app/").description("Deployed Ngrok Server")));
+                        .addSecuritySchemes("Authorization", securityScheme))
+                        .addSecurityItem(new SecurityRequirement().addList("ngrok-skip-browser-warning", "1")) //add this to force ngrok from throwing warning message
+                .servers(List.of(new Server().url("http://localhost:3001/").description("Localhost Server"),
+                        new Server().url("https://afd1-203-161-56-189.ngrok-free.app/").description("Deployed Ngrok Server")));
     }
 }
