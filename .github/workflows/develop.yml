@@ -43,7 +43,7 @@ jobs:
       - name: Add Host Key
         run: |
           mkdir -p ~/.ssh                                # Ensure the .ssh directory exists
-          ssh-keyscan -H ${{ secrets.VPS_CONNECTION }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts    
     
       - name: Deploy to Staging
