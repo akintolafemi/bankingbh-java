@@ -39,10 +39,15 @@ jobs:
           
       - name: Install SSHPASS
         run: sudo apt-get install -y sshpass
-          
+      
+      - name: Add Host Key
+        run: |
+          mkdir -p ~/.ssh                                # Ensure the .ssh directory exists
+          ssh-keyscan -H ${{ secrets.VPS_CONNECTION }} >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts    
+    
       - name: Deploy to Staging
         run: |
-          ssh-keyscan -H ${{ secrets.VPS_CONNECTION }} >> ~/.ssh/known_hosts
           sshpass -p "${{ secrets.VPS_PASS }}" scp ${{ github.workspace }}/target/bankingbh-1.0-SNAPSHOT.jar ${{ secrets.VPS_CONNECTION }}:/bankingbh/
         env:
           SSHPASS: ${{ secrets.VPS_PASS }}
