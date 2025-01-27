@@ -42,6 +42,6 @@ jobs:
           
       - name: Deploy to Staging
         run: |
-          sshpass -p "${{ secrets.VPS_PASS }}" scp /home/runner/work/bankingbh-java/bankingbh-java/target/bankingbh.jar ${{ secrets.VPS_CONNECTION }}:/bankingbh/
+          sshpass -p "${{ secrets.VPS_PASS }}" scp ${{ github.workspace }}/target/bankingbh-1.0-SNAPSHOT.jar ${{ secrets.VPS_CONNECTION }}:/bankingbh/
         env:
           SSHPASS: ${{ secrets.VPS_PASS }}
