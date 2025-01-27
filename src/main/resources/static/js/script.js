@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3001/api/v1";
+const API_BASE_URL = "https://localhost:8443/api/v1";
 const BEARER_TOKEN = '';
 const FORMATTER = new Intl.NumberFormat('en-US', {
     style: 'currency',
