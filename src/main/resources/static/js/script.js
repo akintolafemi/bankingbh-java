@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://afd1-203-161-56-189.ngrok-free.app/api/v1";
+const API_BASE_URL = "http://localhost:3001/api/v1";
 const BEARER_TOKEN = '';
 const FORMATTER = new Intl.NumberFormat('en-US', {
     style: 'currency',
