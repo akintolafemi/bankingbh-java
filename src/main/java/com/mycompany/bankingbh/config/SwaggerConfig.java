@@ -8,6 +8,8 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,6 +39,8 @@ public class SwaggerConfig {
                         .description("API to be used for opening a new 'current account' of already existing customers."))
                 .addSecurityItem(securityRequirement)
                 .components(new io.swagger.v3.oas.models.Components()
-                        .addSecuritySchemes("Authorization", securityScheme));
+                        .addSecuritySchemes("Authorization", securityScheme))
+                        .addSecurityItem(new SecurityRequirement().addList("ngrok-skip-browser-warning", "1"))
+                .servers(List.of(new Server().url("https://afd1-203-161-56-189.ngrok-free.app/")));
     }
 }
